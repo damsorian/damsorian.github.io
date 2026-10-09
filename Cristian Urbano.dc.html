@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=Instrument+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{background:#f5f2ed;font-family:'Instrument Sans',system-ui,sans-serif;color:#1a1720;-webkit-font-smoothing:antialiased}
+  a{color:#a6552e;text-decoration:none}
+  a:hover{color:#833f1f}
+  ::selection{background:#a9d6cf}
+  .mono{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace}
+  .disp{font-family:'Space Grotesk',system-ui,sans-serif}
+  .sec-title{font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;font-size:34px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin:0 0 8px;color:#1a1720}
+  .sec-title .sl{color:#a6552e}
+  .sec-sub{font-family:'Space Grotesk',system-ui,sans-serif;font-size:19px;font-weight:500;letter-spacing:-.01em;line-height:1.35;color:#5c5766;margin:0 0 32px}
+  .tag{font-size:11px;color:#6f6a78;border:1px solid rgba(26,23,32,.16);border-radius:6px;padding:3px 9px;white-space:nowrap}
+  .role{padding:22px 0;border-bottom:1px solid rgba(26,23,32,.1)}
+  .role:first-child{padding-top:0}
+  .role:last-child{border-bottom:0;padding-bottom:0}
+    .chip{border:1px solid rgba(26,23,32,.2);border-radius:7px;padding:8px 13px;font-size:12.5px}
+  .lang-btn{padding:5px 11px;cursor:pointer;border:0;font:inherit;font-size:12px;font-weight:600}
+  a:focus-visible,button:focus-visible{outline:2px solid #a6552e;outline-offset:2px}
+  @media (max-width:860px){
+    .pad{padding-left:20px !important;padding-right:20px !important}
+    .stats > div{padding:20px 16px !important}
+    .stat-num{font-size:30px !important}
+    .stat-label{font-size:14px !important}
+    .cols{grid-template-columns:1fr !important;gap:56px !important}
+    .hero-h1{font-size:40px !important}
+    .sec-title{font-size:28px}
+    .sec-sub{font-size:17px}
+    .contact-h{font-size:34px !important}
+  }
+  @media (max-width:640px){
+    .stats > div{padding:16px 10px !important}
+    .stat-num{font-size:24px !important}
+    .stat-unit{font-size:10px !important}
+    .stat-label{font-size:12px !important;line-height:1.25}
+  }
+  @media (max-width:480px){
+    .md-label,.pdf-pre{display:none}
+    .stats > div{padding:14px 8px !important}
+    .stat-num{font-size:20px !important}
+    .stat-unit{font-size:9px !important}
+    .stats .stat-num{gap:4px}
+    .stat-label{font-size:11px !important}
+  }
+</style></helmet>
+<div style="width:100%;overflow-x:hidden">
+
+  <div style="position:sticky;top:0;z-index:20;backdrop-filter:blur(10px);background:rgba(245,242,237,.72);border-bottom:1px solid rgba(26,23,32,.08)">
+    <div class="pad" style="max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:15px 40px;gap:12px">
+      <a href="#top" class="mono" style="font-size:14px;font-weight:600;color:#1a1720"><span style="color:#a6552e">~/</span>cristian-urbano</a>
+      <div class="mono" style="display:flex;align-items:center;gap:11px;font-size:13px">
+        <div style="display:flex;border:1px solid rgba(26,23,32,.2);border-radius:6px;overflow:hidden">
+          <button class="lang-btn mono" onClick="{{ setEn }}" aria-label="English" aria-pressed="{{ isEn }}" style="{{ enStyle }}">EN</button>
+          <button class="lang-btn mono" onClick="{{ setEs }}" aria-label="Español" aria-pressed="{{ isEs }}" style="{{ esStyle }}">ES</button>
+        </div>
+        <sc-if value="{{ canPdf }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ onPdf }}" aria-label="{{ t.pdfTitle }}" style="display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(26,23,32,.2);border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;background:none;color:#1a1720;cursor:pointer;font-family:inherit" style-hover="background:rgba(26,23,32,.06)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+            <span><span class="pdf-pre">{{ pdfPre }} </span>{{ pdfWord }}</span>
+          </button>
+        </sc-if>
+        <button onClick="{{ openMd }}" aria-label="{{ t.mdTitle }}" style="display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(26,23,32,.2);border-radius:6px;padding:5px 11px;font-size:12px;font-weight:600;background:none;color:#1a1720;cursor:pointer;font-family:inherit" style-hover="background:rgba(26,23,32,.06)">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:3px;background:#1a1720;color:#f5f2ed;font-size:9px;font-weight:700">M<span style="font-size:8px">↓</span></span><span class="md-label">Markdown</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="top" style="position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:
+      radial-gradient(52% 90% at 10% 10%,#f2cf9e 0%,rgba(242,207,158,0) 55%),
+      radial-gradient(56% 100% at 92% 0%,#a9d6cf 0%,rgba(169,214,207,0) 58%),
+      radial-gradient(60% 110% at 82% 120%,#8fb9d6 0%,rgba(143,185,214,0) 55%),
+      radial-gradient(52% 100% at 18% 130%,#c7baa0 0%,rgba(199,186,160,0) 55%),
+      radial-gradient(46% 80% at 55% 45%,#f6efe6 0%,rgba(246,239,230,0) 60%),#f5f2ed"></div>
+    <div style="position:absolute;inset:0;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E&quot;);opacity:.14;mix-blend-mode:multiply"></div>
+    <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(26,23,32,.13) 1px,transparent 1px);background-size:26px 26px;mix-blend-mode:multiply"></div>
+    <div id="about" class="pad" style="position:relative;max-width:860px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;padding:52px 40px 64px">
+      <div style="width:104px;height:104px;border-radius:50%;overflow:hidden;margin-bottom:22px;box-shadow:0 10px 34px rgba(26,23,32,.16)">
+        <img src="uploads/crisur2.png" alt="Cristian Urbano" style="width:100%;height:100%;object-fit:cover;-webkit-mask-image:radial-gradient(circle at 50% 45%,#000 60%,transparent 90%);mask-image:radial-gradient(circle at 50% 45%,#000 60%,transparent 90%)">
+      </div>
+      <div class="mono" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:22px">
+        <sc-for list="{{ t.heroChips }}" as="c">
+          <span style="background:rgba(26,23,32,.06);border:1px solid rgba(26,23,32,.14);border-radius:99px;padding:6px 13px;font-size:12px;color:#3a3542">{{ c }}</span>
+        </sc-for>
+      </div>
+      <h1 class="disp hero-h1" style="{{ t.h1Style }}">{{ t.h1a }}<span style="{{ t.h1wStyle }}"><span style="{{ t.h1bStyle }}">{{ t.h1b }}</span>{{ t.h1c }}</span><span style="{{ t.h1dStyle }}">{{ t.h1d }}</span></h1>
+      <p style="font-size:18px;line-height:1.6;color:#5c5766;max-width:58ch;margin:0 0 28px;text-wrap:pretty">{{ t.heroText }}</p>
+      <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center">
+        <a href="https://github.com/damsorian" target="_blank" rel="noopener noreferrer" class="mono" style="display:inline-flex;padding:14px 22px;border:1px solid rgba(26,23,32,.25);border-radius:8px;font-size:14px;font-weight:500;color:#1a1720" style-hover="background:rgba(26,23,32,.07)">/github ↗</a>
+        <a href="https://www.linkedin.com/in/cristianurbano/" target="_blank" rel="noopener noreferrer" class="mono" style="display:inline-flex;align-items:center;gap:9px;background:#1a1720;color:#f5f2ed;padding:14px 26px;border-radius:8px;font-size:14px;font-weight:600" style-hover="background:#35303f">/linkedin <span style="opacity:.6">↗</span></a>
+      </div>
+      <div class="mono" style="margin-top:22px;font-size:12.5px;color:#6f6a78;display:inline-flex;align-items:center;gap:6px"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>Bariloche, Argentina</div>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid rgba(26,23,32,.08);border-bottom:1px solid rgba(26,23,32,.08);background:rgba(255,255,255,.45)">
+    <div class="stats" style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)">
+      <sc-for list="{{ t.stats }}" as="s">
+        <div style="padding:26px 40px;border-right:1px solid rgba(26,23,32,.08)">
+          <div style="display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;column-gap:5px"><div class="disp stat-num" style="font-size:38px;font-weight:600;letter-spacing:-.02em">{{ s.num }}</div><div class="mono stat-unit" style="font-size:13px;color:#4a4552">{{ s.unit }}</div></div>
+          <div class="disp stat-label" style="font-size:17px;font-weight:500;color:#1a1720;margin-top:2px">{{ s.label }}</div>
+        </div>
+      </sc-for>
+      <div style="padding:26px 40px">
+        <div class="disp stat-num" style="font-size:38px;font-weight:600;letter-spacing:-.02em">B1+</div>
+        <div class="disp stat-label" style="font-size:17px;font-weight:500;color:#1a1720;margin-top:2px">{{ t.english }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cols pad" style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:64px;padding:76px 40px 80px">
+
+    <div id="experience" style="min-width:0">
+      <h2 class="sec-title"><span class="sl">/</span>{{ t.rolesH }}</h2>
+      <p class="sec-sub">{{ t.rolesSub }}</p>
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ t.roles }}" as="r">
+          <div class="role">
+            <div class="disp" style="font-size:20px;font-weight:600;letter-spacing:-.01em">{{ r.title }}</div>
+            <div class="mono" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:9px"><sc-for list="{{ r.where }}" as="w"><span class="tag">{{ w }}</span></sc-for></div>
+            <div style="font-size:15px;color:#4a4552;margin-top:12px;line-height:1.65;max-width:62ch;text-wrap:pretty">{{ r.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div id="skills" style="min-width:0">
+      <h2 class="sec-title"><span class="sl">/</span>{{ t.skillsH }}</h2>
+      <p class="sec-sub">{{ t.skillsSub }}</p>
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <sc-for list="{{ t.skills }}" as="k">
+          <div>
+            <div class="mono" style="font-size:16px;color:#a6552e;font-weight:600;margin-bottom:12px">{{ k.name }}</div>
+            <div class="mono" style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ k.chips }}" as="c"><span class="chip">{{ c }}</span></sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <h2 class="sec-title" style="margin-top:56px"><span class="sl">/</span>{{ t.stackH }}</h2>
+      <p class="sec-sub">{{ t.stackSub }}</p>
+      <div style="display:flex;flex-direction:column;gap:28px">
+        <sc-for list="{{ t.stack }}" as="k">
+          <div>
+            <div class="mono" style="font-size:16px;color:#a6552e;font-weight:600;margin-bottom:12px">{{ k.name }}</div>
+            <div class="mono" style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ k.chips }}" as="c"><span class="chip">{{ c }}</span></sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="contact" style="position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:
+      radial-gradient(60% 120% at 15% 0%,#a9d6cf 0%,rgba(169,214,207,0) 55%),
+      radial-gradient(55% 120% at 85% 100%,#f2cf9e 0%,rgba(242,207,158,0) 55%),
+      radial-gradient(50% 110% at 60% 120%,#8fb9d6 0%,rgba(143,185,214,0) 55%),#efece6"></div>
+    <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(26,23,32,.1) 1px,transparent 1px);background-size:26px 26px;mix-blend-mode:multiply"></div>
+    <div class="pad" style="position:relative;max-width:1180px;margin:0 auto;padding:72px 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap">
+      <div>
+        <h2 class="sec-title" style="font-size:18px;margin-bottom:16px"><span class="sl">/</span>{{ t.contactH }}</h2>
+        <div class="disp contact-h" style="font-size:44px;font-weight:600;line-height:1.05;letter-spacing:-.025em;max-width:22ch">{{ t.contactA }}<br>{{ t.contactB }}</div>
+      </div>
+      <div class="mono" style="display:flex;gap:10px;font-size:14px;flex-wrap:wrap">
+        <a href="https://github.com/damsorian" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(26,23,32,.25);color:#1a1720;padding:13px 24px;border-radius:8px;font-weight:600;width:fit-content" style-hover="background:rgba(26,23,32,.07)">/github <span style="opacity:.6">↗</span></a>
+        <a href="https://www.linkedin.com/in/cristianurbano/" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:9px;background:#1a1720;color:#f5f2ed;padding:13px 24px;border-radius:8px;font-weight:600;width:fit-content" style-hover="background:#35303f">/linkedin <span style="opacity:.6">↗</span></a>
+      </div>
+    </div>
+    <div style="position:relative;border-top:1px solid rgba(26,23,32,.1)"><div class="mono pad" style="max-width:1180px;margin:0 auto;padding:20px 40px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;font-size:12.5px;color:#6f6a78"><span>© 2026 Cristian Urbano</span><div style="display:flex;gap:18px"><span style="display:inline-flex;align-items:center;gap:5px"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>Bariloche, Argentina</span></div></div></div>
+  </div>
+  <sc-if value="{{ showMd }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMd }}" style="position:fixed;inset:0;z-index:100;background:rgba(15,14,18,.55);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:32px">
+      <div onClick="{{ stop }}" role="dialog" aria-modal="true" aria-label="cristian-urbano.md" style="width:100%;max-width:840px;height:86vh;display:flex;flex-direction:column;background:#17151c;border:1px solid rgba(255,255,255,.09);border-radius:16px;box-shadow:0 40px 120px rgba(0,0,0,.5);overflow:hidden">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)">
+          <div class="mono" style="display:flex;align-items:center;gap:10px;font-size:13px;color:#8f8a9c">
+            <span style="display:flex;gap:6px"><span style="width:11px;height:11px;border-radius:50%;background:#ff5f56"></span><span style="width:11px;height:11px;border-radius:50%;background:#ffbd2e"></span><span style="width:11px;height:11px;border-radius:50%;background:#27c93f"></span></span>
+            <span style="color:#c9c4d6">cristian-urbano.md</span>
+          </div>
+          <div class="mono" style="display:flex;align-items:center;gap:9px;font-size:12px">
+            <button onClick="{{ copyMd }}" style="display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(255,255,255,.14);border-radius:7px;padding:6px 13px;font-weight:600;background:none;color:#e7e3f0;cursor:pointer;font-family:inherit" style-hover="background:rgba(255,255,255,.07)">{{ copyLabel }}</button>
+            <button onClick="{{ closeMd }}" aria-label="{{ t.close }}" style="display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border:1px solid rgba(255,255,255,.14);border-radius:7px;background:none;color:#e7e3f0;cursor:pointer;font-size:15px;font-family:inherit" style-hover="background:rgba(255,255,255,.07)">✕</button>
+          </div>
+        </div>
+        <pre id="md-pre" class="mono" style="margin:0;flex:1;overflow:auto;padding:26px 30px;font-size:13px;line-height:1.75;color:#c9c4d6;white-space:pre-wrap;word-break:break-word">{{ mdText }}</pre>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"$preview":{"width":1280,"height":3200}}'>
+const LINKEDIN = "https://www.linkedin.com/in/cristianurbano/";
+const GITHUB = "https://github.com/damsorian";
+
+const COPY = {
+  en: {
+    mdTitle: "View as Markdown for AI",
+    pdfTitle: "Download my CV as PDF (one page)",
+    pdfPre: "Download", pdfWord: "CV", pdfBusy: "Preparing…", pdfDone: "Downloaded ✓",
+    close: "Close",
+    copy: "Copy",
+    copied: "Copied ✓",
+    selectHint: "Selected, press Ctrl/Cmd+C",
+    heroChips: ["Tech Lead & Architect", "AI Engineer & Automation", "Full-Stack TypeScript"],
+    h1a: "Building ", h1b: "AI-Human-First", h1c: " products, end to end.", h1d: "",
+    h1Style: "font-weight:600;font-size:58px;line-height:1.05;letter-spacing:-.025em;margin:0 0 18px;text-wrap:balance;max-width:17ch", h1bStyle: "color:#a6552e;white-space:nowrap", h1wStyle: "", h1dStyle: "",
+    heroText: "Lead software engineer with 15+ years building digital products. Specialized in AI Agents, Workflows and Platforms, and in Developer Experience, owning the full Product Cycle from idea to launch. Deep technical craft with a human-centered eye.",
+    stats: [
+      { num: "15+", unit: "years", label: "engineering" },
+      { num: "8+", unit: "years", label: "leading teams" },
+      { num: "4+", unit: "years", label: "AI specialized" },
+    ],
+    english: "English",
+    rolesH: "roles", rolesSub: "The roles I take on and enjoy.",
+    roles: [
+      { title: "AI Adoption & DEX",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "I help teams make AI part of how they build every day. Through Developer Experience (DEX) I choose tools that fit the team's way of working, set up the workflows and review practices around them, and stay close to developers while the habits settle. The goal is faster delivery with a quality the team trusts." },
+      { title: "AI Engineer & Automation",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "I build agents and automated workflows that run inside real products, including LLM features in production for a healthcare platform. There, accuracy, cost and graceful failure handling matter as much as the model choice. I own the whole path, from the prompt and agent logic to the integrations that connect it to the system." },
+      { title: "Full-Cycle Product",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "I own a product from the first conversation to launch: defining what to build and why, shaping the design, planning the delivery and guiding the implementation. Working with AI shortens that loop, so a small team can cover a wide scope and keep quality high." },
+      { title: "Tech Strategy & Innovation",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "I evaluate new tools and approaches early and turn them into clear options leadership can decide on. I start with small experiments, keep what proves its value and bring each idea with a realistic plan, so strategy stays connected to delivery. Following what emerges in AI closely helps the team adopt new capabilities at the right moment." },
+      { title: "Tech Lead & Architect",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "I have led engineering teams for over eight years, making the technical direction clear: the architecture we commit to, the trade-offs we accept and the reasoning behind them. Mentoring is a constant part of the role, because a team that shares the reasoning makes strong decisions on its own." },
+      { title: "Lead Frontend Engineer",
+        where: ["Bridge", "Globant", "Olapic", "Freelance", "Startups"],
+        desc: "Frontend is where product decisions become visible, so I treat it as engineering and as UX. I set the architecture, component patterns and standards the team builds on, across enterprise and user-generated-content platforms, keeping interfaces fast, consistent and easy to evolve as the product grows." },
+      { title: "Full-Stack Engineer",
+        where: ["Bridge", "Unisono", "Moobin", "Freelance", "Startups"],
+        desc: "I started as a full-stack engineer and it still shapes how I work. With more than 15 years behind me, I follow a feature from the interface to the API to the cloud setup, and I understand how each layer influences the others. That range lets me lead with credibility and step in wherever the team needs me." },
+    ],
+    skillsH: "skills", skillsSub: "My strengths and focus areas.",
+    skills: [
+      { name: "engineering", chips: ["Full-Stack Development", "Frontend Architecture", "Solution Architecture", "System Design", "Web Applications"] },
+      { name: "ai_engineering", chips: ["AI Agents", "Agentic Workflows", "AI Automation", "Prompt Engineering", "LLM Applications"] },
+      { name: "developer_experience", chips: ["Developer Experience", "AI Adoption", "AI-driven SDLC", "AI-assisted Development", "Agentic Coding", "Developer Productivity", "Team Enablement"] },
+      { name: "product_cycle", chips: ["Product Management", "Product Design", "UX Engineering", "Planning & Delivery", "Supervision", "Idea to Launch"] },
+      { name: "leadership", chips: ["Technical Leadership", "Team Leadership", "Mentorship", "Innovation & Strategy"] },
+    ],
+    stackH: "stack", stackSub: "Frameworks and tools I work with.",
+    stack: [
+      { name: "ai", chips: ["MastraAI", "LangChain", "LangGraph", "n8n", "OpenAI", "Claude", "Google Vertex AI"] },
+      { name: "frontend", chips: ["TypeScript", "JavaScript", "Angular", "React", "Next.js", "Tailwind CSS", "Turborepo"] },
+      { name: "backend", chips: ["TypeScript", "Node.js", "Nest.js", "Supabase", "MongoDB"] },
+      { name: "cloud", chips: ["Google Cloud", "Firebase", "GitHub", "CI/CD"] },
+      { name: "design & management", chips: ["Claude Design", "Artifacts", "Figma", "Miro", "Jira", "Linear", "Google Workspace", "Claude Workspace"] },
+    ],
+    contactH: "contact", contactA: "Let's build something", contactB: "that really connects",
+    mdFile: {
+      tagline: "Building AI-Human-First products, end to end.",
+      role: "Role", location: "Location", links: "Links",
+      glance: "At a glance", yearsEng: "engineering", yearsLead: "leading teams", yearsAI: "AI specialized", languages: "Languages",
+      langVal: "English (B1+)",
+      roles: "Roles", where: "Where", skills: "Skills", stackTitle: "Stack", contact: "Contact",
+      contactText: "Let's build something that really connects.",
+    },
+  },
+  es: {
+    mdTitle: "Ver como Markdown para IA",
+    pdfTitle: "Descargar mi CV en PDF (una página)",
+    pdfPre: "Descargar", pdfWord: "CV", pdfBusy: "Preparando…", pdfDone: "Descargado ✓",
+    close: "Cerrar",
+    copy: "Copiar",
+    copied: "Copiado ✓",
+    selectHint: "Seleccionado, usá Ctrl/Cmd+C",
+    heroChips: ["Tech Lead & Architect", "AI Engineer & Automation", "Full-Stack TypeScript"],
+    h1a: "Construyendo productos ", h1b: "AI-Human-First", h1c: ",", h1d: "de punta a punta.",
+    h1Style: "font-weight:600;font-size:58px;line-height:1.05;letter-spacing:-.025em;margin:0 0 18px;text-wrap:balance;max-width:24ch", h1bStyle: "color:#a6552e;white-space:nowrap", h1wStyle: "display:block", h1dStyle: "display:block",
+    heroText: "Lead software engineer con más de 15 años construyendo productos digitales. Especializado en Agentes, Workflows y Plataformas de IA, y en Developer Experience, a cargo de todo el Ciclo de Producto, de la idea al lanzamiento. Oficio técnico profundo con una mirada centrada en las personas.",
+    stats: [
+      { num: "15+", unit: "años", label: "ingeniería" },
+      { num: "8+", unit: "años", label: "liderando equipos" },
+      { num: "4+", unit: "años", label: "especializado en IA" },
+    ],
+    english: "Inglés",
+    rolesH: "roles", rolesSub: "Los roles que asumo y disfruto.",
+    roles: [
+      { title: "AI Adoption & DEX",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "Ayudo a los equipos a hacer de la IA parte de su forma diaria de construir. A través de Developer Experience (DEX) elijo las herramientas que encajan con el modo de trabajo del equipo, armo los workflows y las prácticas de revisión que las rodean, y acompaño de cerca a los desarrolladores mientras se asientan los hábitos. El objetivo es entregar más rápido con una calidad en la que el equipo confía." },
+      { title: "AI Engineer & Automation",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "Construyo agentes y workflows automatizados que corren dentro de productos reales, incluidas funcionalidades con LLMs en producción para una plataforma de salud. Ahí, la precisión, el costo y el manejo ordenado de fallas pesan tanto como la elección del modelo. Me hago cargo del camino completo, desde el prompt y la lógica del agente hasta las integraciones que lo conectan con el sistema." },
+      { title: "Producto de ciclo completo",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "Me hago cargo de un producto desde la primera conversación hasta el lanzamiento: defino qué construir y por qué, doy forma al diseño, planifico la entrega y guío la implementación. Trabajar con IA acorta ese ciclo, y así un equipo chico cubre un alcance amplio y mantiene la calidad alta." },
+      { title: "Tech Strategy & Innovation",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "Evalúo herramientas y enfoques nuevos desde temprano y los convierto en opciones claras sobre las que la dirección pueda decidir. Empiezo con experimentos chicos, me quedo con lo que demuestra valor y presento cada idea con un plan realista, para que la estrategia siga conectada con la entrega. Seguir de cerca lo que surge en IA ayuda al equipo a incorporar nuevas capacidades en el momento justo." },
+      { title: "Tech Lead & Architect",
+        where: ["Bridge", "Freelance", "Startups"],
+        desc: "Lidero equipos de ingeniería hace más de ocho años y dejo clara la dirección técnica: la arquitectura que adoptamos, los compromisos que aceptamos y el razonamiento detrás de cada uno. La mentoría es una parte constante del rol, porque un equipo que comparte el razonamiento toma buenas decisiones por sí mismo." },
+      { title: "Lead Frontend Engineer",
+        where: ["Bridge", "Globant", "Olapic", "Freelance", "Startups"],
+        desc: "El frontend es donde las decisiones de producto se hacen visibles, así que lo trabajo como ingeniería y como UX. Defino la arquitectura, los patrones de componentes y los estándares sobre los que construye el equipo, en plataformas enterprise y de contenido generado por usuarios, con interfaces rápidas, consistentes y fáciles de evolucionar a medida que el producto crece." },
+      { title: "Full-Stack Engineer",
+        where: ["Bridge", "Unisono", "Moobin", "Freelance", "Startups"],
+        desc: "Empecé como ingeniero full-stack y todavía define cómo trabajo. Con más de 15 años de experiencia sigo una funcionalidad desde la interfaz hasta la API y la configuración en la nube, y entiendo cómo cada capa influye en las otras. Ese rango me permite liderar con credibilidad y sumarme donde el equipo lo necesite." },
+    ],
+    skillsH: "skills", skillsSub: "Mis fortalezas y focos.",
+    skills: [
+      { name: "ingenieria", chips: ["Desarrollo full-stack", "Arquitectura frontend", "Arquitectura de soluciones", "Diseño de sistemas", "Aplicaciones web"] },
+      { name: "ingenieria_ia", chips: ["Agentes de IA", "Workflows agénticos", "Automatización con IA", "Prompt Engineering", "Aplicaciones con LLMs"] },
+      { name: "developer_experience", chips: ["Developer Experience", "Adopción de IA", "SDLC impulsado por IA", "Desarrollo asistido por IA", "Agentic Coding", "Developer Productivity", "Team Enablement"] },
+      { name: "producto_ciclo", chips: ["Product Management", "Diseño de producto", "Ingeniería de UX", "Planificación y delivery", "Supervisión", "De la idea al lanzamiento"] },
+      { name: "liderazgo", chips: ["Liderazgo técnico", "Liderazgo de equipos", "Mentoría", "Innovación y estrategia"] },
+    ],
+    stackH: "stack", stackSub: "Frameworks y herramientas con las que trabajo.",
+    stack: [
+      { name: "ia", chips: ["MastraAI", "LangChain", "LangGraph", "n8n", "OpenAI", "Claude", "Google Vertex AI"] },
+      { name: "frontend", chips: ["TypeScript", "JavaScript", "Angular", "React", "Next.js", "Tailwind CSS", "Turborepo"] },
+      { name: "backend", chips: ["TypeScript", "Node.js", "Nest.js", "Supabase", "MongoDB"] },
+      { name: "cloud", chips: ["Google Cloud", "Firebase", "GitHub", "CI/CD"] },
+      { name: "diseno & gestion", chips: ["Claude Design", "Artifacts", "Figma", "Miro", "Jira", "Linear", "Google Workspace", "Claude Workspace"] },
+    ],
+    contactH: "contacto", contactA: "Construyamos algo", contactB: "que realmente conecte",
+    mdFile: {
+      tagline: "Construyendo productos AI-Human-First, de punta a punta.",
+      role: "Rol", location: "Ubicación", links: "Links",
+      glance: "De un vistazo", yearsEng: "ingeniería", yearsLead: "liderando equipos", yearsAI: "especializado en IA", languages: "Idiomas",
+      langVal: "Inglés (B1+)",
+      roles: "Roles", where: "Dónde", skills: "Skills", stackTitle: "Stack", contact: "Contacto",
+      contactText: "Construyamos algo que realmente conecte.",
+    },
+  },
+};
+
+const ACTIVE = "background:#1a1720;color:#f5f2ed";
+const IDLE = "background:transparent;color:#1a1720";
+
+class Component extends DCLogic {
+  state = { showMd: false, copied: false, lang: "en", canPdf: false, pdf: "idle" };
+
+  componentDidMount() {
+    let saved = null;
+    try { saved = localStorage.getItem("cu-lang"); } catch (_) {}
+    if (!saved) {
+      try { saved = (navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en"; } catch (_) {}
+    }
+    if (saved === "es" || saved === "en") this.applyLang(saved);
+    // The CV download is handed to the page that frames this one (it holds the downloads capability).
+    this._msg = (e) => {
+      const d = e && e.data;
+      if (e.source !== window.parent || !d || d.cu !== true) return;
+      if (d.type === "caps") this.setState({ canPdf: !!d.pdf });
+      if (d.type === "result") {
+        clearTimeout(this._pt);
+        this.setState({ pdf: d.status === "saved" ? "done" : "idle" });
+        if (d.status === "saved") this._pt = setTimeout(() => this.setState({ pdf: "idle" }), 2600);
+      }
+    };
+    try {
+      window.addEventListener("message", this._msg);
+      if (window.parent && window.parent !== window) window.parent.postMessage({ cu: true, type: "hello" }, "*");
+    } catch (_) {}
+    this._key = (e) => { if (e.key === "Escape" && this.state.showMd) this.setState({ showMd: false, copied: false }); };
+    try { document.addEventListener("keydown", this._key); } catch (_) {}
+  }
+
+  componentWillUnmount() {
+    try { document.removeEventListener("keydown", this._key); } catch (_) {}
+    try { window.removeEventListener("message", this._msg); } catch (_) {}
+    clearTimeout(this._t);
+    clearTimeout(this._pt);
+  }
+
+  applyLang(lang) {
+    this.setState({ lang, copied: false });
+    try { localStorage.setItem("cu-lang", lang); } catch (_) {}
+    try { document.documentElement.lang = lang; } catch (_) {}
+  }
+
+  md(t) {
+    const m = t.mdFile;
+    const roles = t.roles.map((r) => `### ${r.title}\n*${m.where}:* ${r.where.join(", ")}\n${r.desc}`).join("\n\n");
+    const skills = t.skills.map((k) => `**${k.name}:** ${k.chips.join(", ")}`).join("\n\n");
+    const stack = t.stack.map((k) => `**${k.name}:** ${k.chips.join(", ")}`).join("\n\n");
+    const glance = [
+      `- **${t.stats[0].num} ${t.stats[0].unit}** ${m.yearsEng}`,
+      `- **${t.stats[1].num} ${t.stats[1].unit}** ${m.yearsLead}`,
+      `- **${t.stats[2].num} ${t.stats[2].unit}** ${m.yearsAI}`,
+      `- **${m.languages}:** ${m.langVal}`,
+    ].join("\n");
+    return `# Cristian Urbano
+> ${m.tagline}
+
+**${m.role}:** ${t.heroChips.join(", ")}
+**${m.location}:** Bariloche, Argentina
+**${m.links}:** [LinkedIn](${LINKEDIN}) · [GitHub](${GITHUB})
+
+${t.heroText}
+
+## ${m.glance}
+${glance}
+
+## ${m.roles}
+
+${roles}
+
+## ${m.skills}
+
+${skills}
+
+## ${m.stackTitle}
+
+${stack}
+
+## ${m.contact}
+${m.contactText}
+- LinkedIn — ${LINKEDIN}
+- GitHub — ${GITHUB}
+`;
+  }
+
+  renderVals() {
+    const lang = this.state.lang === "es" ? "es" : "en";
+    const t = COPY[lang];
+    const md = this.md(t);
+    return {
+      t,
+      showMd: this.state.showMd,
+      mdText: md,
+      copyLabel: this.state.copied === "ok" ? t.copied : this.state.copied === "select" ? t.selectHint : t.copy,
+      canPdf: this.state.canPdf,
+      pdfPre: this.state.pdf === "idle" ? t.pdfPre : "",
+      pdfWord: this.state.pdf === "busy" ? t.pdfBusy : this.state.pdf === "done" ? t.pdfDone : t.pdfWord,
+      onPdf: () => {
+        if (this.state.pdf === "busy") return;
+        this.setState({ pdf: "busy" });
+        clearTimeout(this._pt);
+        this._pt = setTimeout(() => this.setState({ pdf: "idle" }), 30000);
+        try { window.parent.postMessage({ cu: true, type: "download", lang }, "*"); } catch (_) { this.setState({ pdf: "idle" }); }
+      },
+      isEn: lang === "en",
+      isEs: lang === "es",
+      enStyle: lang === "en" ? ACTIVE : IDLE,
+      esStyle: lang === "es" ? ACTIVE : IDLE,
+      setEn: () => this.applyLang("en"),
+      setEs: () => this.applyLang("es"),
+      openMd: () => this.setState({ showMd: true, copied: false }),
+      closeMd: () => this.setState({ showMd: false, copied: false }),
+      stop: (e) => e.stopPropagation(),
+      copyMd: (e) => {
+        e.stopPropagation();
+        const done = (state) => {
+          this.setState({ copied: state });
+          clearTimeout(this._t);
+          this._t = setTimeout(() => this.setState({ copied: false }), 2400);
+        };
+        const fallback = () => {
+          let ok = false;
+          try {
+            const pre = document.getElementById("md-pre");
+            const range = document.createRange();
+            range.selectNodeContents(pre);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            ok = document.execCommand("copy");
+          } catch (_) {}
+          done(ok ? "ok" : "select");
+        };
+        try { navigator.clipboard.writeText(md).then(() => done("ok"), fallback); } catch (_) { fallback(); }
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>
