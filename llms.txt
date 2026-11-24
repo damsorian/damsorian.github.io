@@ -1,0 +1,17 @@
+# Cristian Urbano
+
+> Lead software engineer with 15+ years building digital products. Specialized in AI Agents, Workflows and Platforms, and in Developer Experience, owning the full Product Cycle from idea to launch. Deep technical craft with a human-centered eye.
+
+Cristian Urbano is a lead software engineer based in Bariloche, Argentina. Roles: Tech Lead & Architect, AI Engineer & Automation, Full-Stack TypeScript. Works in English and Spanish.
+
+## Profile
+
+- [Profile in Markdown (English)](https://damsorian.github.io/cristian-urbano.md): roles, skills, stack and contact.
+- [Perfil en Markdown (español)](https://damsorian.github.io/es/cristian-urbano.md): el mismo perfil en español.
+- [CV, one page (PDF, English)](https://damsorian.github.io/cristian-urbano-en.pdf)
+- [CV, una página (PDF, español)](https://damsorian.github.io/cristian-urbano-es.pdf)
+
+## Links
+
+- [LinkedIn](https://www.linkedin.com/in/cristianurbano/): experience and contact.
+- [GitHub](https://github.com/damsorian): code.

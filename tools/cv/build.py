@@ -18,7 +18,7 @@ photo = base64.b64encode(open(_photo, "rb").read()).decode()
 
 DATA = {
 "en": dict(
-  lang="en", file="cristian-urbano-en.pdf",
+  lang="en", file="cristian-urbano-en.pdf", pdfTitle="Cristian Urbano · CV · AI Software Engineer & Tech Lead",
   chips=["Tech Lead & Architect","AI Engineer & Automation","Full-Stack TypeScript","Developer Experience"],
   h1=("Building ","AI-Human-First"," products, end to end."),
   lead="Lead software engineer with 15+ years building digital products. Specialized in AI Agents, Workflows and Platforms, Developer Experience and the full Product Cycle, with deep technical craft and a human-centered eye.",
@@ -49,7 +49,7 @@ DATA = {
    ("design & management",["Claude Design","Artifacts","Figma","Miro","Jira","Linear","Google Workspace","Claude Workspace"]),
   ], foot="CV · EN"),
 "es": dict(
-  lang="es", file="cristian-urbano-es.pdf",
+  lang="es", file="cristian-urbano-es.pdf", pdfTitle="Cristian Urbano · CV · AI Software Engineer y Tech Lead",
   chips=["Tech Lead & Architect","AI Engineer & Automation","Full-Stack TypeScript","Developer Experience"],
   h1=("Construyendo productos ","AI-Human-First",", de punta a punta."),
   lead="Lead software engineer con más de 15 años construyendo productos digitales. Especializado en Agentes, Workflows y Plataformas de IA, Developer Experience y Ciclo de Producto, con una mirada centrada en las personas.",
@@ -90,7 +90,7 @@ def page(d):
     stack = "".join(f'<div class="grp"><div class="gn">{e(n)}</div><div class="cw">{chips(c)}</div></div>' for n,c in d["stack"])
     stats = "".join(f'<div class="st"><div class="sn">{n}</div><div class="sc"><small>{d["unit"]}</small><div class="sl">{e(l)}</div></div></div>' for n,l in d["stats"])
     a,b,c = d["h1"]
-    return f'''<!doctype html><html lang="{d["lang"]}"><head><meta charset="utf-8"><title>Cristian Urbano</title>
+    return f'''<!doctype html><html lang="{d["lang"]}"><head><meta charset="utf-8"><title>{e(d["pdfTitle"])}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 @page{{size:A4;margin:0}}

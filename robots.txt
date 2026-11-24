@@ -1,0 +1,5 @@
+# Todo el sitio es público: buscadores y agentes de IA pueden leerlo.
+User-agent: *
+Allow: /
+
+Sitemap: https://damsorian.github.io/sitemap.xml
