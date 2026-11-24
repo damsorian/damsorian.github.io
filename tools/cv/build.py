@@ -96,7 +96,7 @@ def page(d):
 @page{{size:A4;margin:0}}
 *{{box-sizing:border-box;margin:0;padding:0}}
 html,body{{width:210mm;height:297mm;background:#f5f2ed;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-body{{font-family:Inter,sans-serif;color:#1a1720;position:relative;overflow:hidden}}
+body{{font-family:Inter,sans-serif;color:#161c2b;position:relative;overflow:hidden}}
 .mono{{font-family:"JetBrains Mono",monospace}}
 .hero{{position:relative;height:229px;padding:30px 48px 0}}
 .bg{{position:absolute;inset:0 0 0 0;background:
@@ -105,52 +105,52 @@ body{{font-family:Inter,sans-serif;color:#1a1720;position:relative;overflow:hidd
  radial-gradient(60% 110% at 82% 120%,#8fb9d6 0%,rgba(143,185,214,0) 55%),
  radial-gradient(52% 100% at 18% 130%,#c7baa0 0%,rgba(199,186,160,0) 55%),
  radial-gradient(46% 80% at 55% 45%,#f6efe6 0%,rgba(246,239,230,0) 60%),#f5f2ed}}
-.dots{{position:absolute;inset:0;background-image:radial-gradient(rgba(26,23,32,.22) 1px,transparent 1.2px);background-size:22px 22px;opacity:.55}}
+.dots{{position:absolute;inset:0;background-image:radial-gradient(rgba(22,28,43,.22) 1px,transparent 1.2px);background-size:22px 22px;opacity:.55}}
 .top{{position:relative;display:flex;gap:20px;align-items:center}}
-.ph{{width:96px;height:96px;border-radius:50%;background:url(data:image/jpeg;base64,{photo}) center/cover;box-shadow:0 8px 20px rgba(26,23,32,.18);flex:none}}
+.ph{{width:96px;height:96px;border-radius:50%;background:url(data:image/jpeg;base64,{photo}) center/cover;box-shadow:0 8px 20px rgba(22,28,43,.18);flex:none}}
 .nm{{flex:1}}
 .nm h1{{font-family:Inter,sans-serif;font-weight:700;font-size:34px;letter-spacing:-.02em;margin-bottom:9px}}
 .cr{{display:flex;flex-wrap:wrap;gap:7px;max-width:350px}}
-.tag{{border:1px solid rgba(26,23,32,.22);background:rgba(26,23,32,.05);border-radius:999px;padding:3px 10px;font:500 9.5px "JetBrains Mono",monospace}}
+.tag{{border:1px solid rgba(22,28,43,.22);background:rgba(22,28,43,.05);border-radius:999px;padding:3px 10px;font:500 9.5px "JetBrains Mono",monospace}}
 .ct{{font:500 10.5px "JetBrains Mono",monospace;display:flex;flex-direction:column;gap:9px}}
 .ct div{{display:flex;align-items:center;gap:7px}}
 .ct svg{{width:15px;height:15px;flex:none}}
 .tl{{position:relative;margin-top:22px;font:700 17px Inter,sans-serif;letter-spacing:-.01em}}
 .tl em{{font-style:normal;color:#a6552e}}
-.lead{{position:relative;margin-top:7px;font-size:12px;line-height:1.55;color:#3a3542;max-width:700px}}
-.stats{{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(26,23,32,.08);border-bottom:1px solid rgba(26,23,32,.08);background:rgba(255,255,255,.5)}}
-.st,.en{{padding:9px 0 9px 48px;border-right:1px solid rgba(26,23,32,.08);display:flex;align-items:center;gap:7px}}
+.lead{{position:relative;margin-top:7px;font-size:12px;line-height:1.55;color:#3f4657;max-width:700px}}
+.stats{{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(22,28,43,.08);border-bottom:1px solid rgba(22,28,43,.08);background:rgba(255,255,255,.5)}}
+.st,.en{{padding:9px 0 9px 48px;border-right:1px solid rgba(22,28,43,.08);display:flex;align-items:center;gap:7px}}
 .st:nth-child(n+2),.en{{padding-left:16px}}
 .sn{{font:700 22px Inter,sans-serif;letter-spacing:-.02em;position:relative}}
 .sc{{display:flex;flex-direction:column;line-height:1.15}}
-.sc small{{font:500 8.5px "JetBrains Mono",monospace;color:#4a4552}}
+.sc small{{font:500 8.5px "JetBrains Mono",monospace;color:#3f4657}}
 .sl{{font:600 11.5px Inter,sans-serif}}
 .en{{border-right:0}}
 .main{{display:grid;grid-template-columns:1fr 1.02fr;gap:30px;padding:20px 48px 0}}
 h2{{font:700 22px "JetBrains Mono",monospace;display:flex;align-items:baseline;gap:9px;margin-bottom:10px}}
 h2 i{{font-style:normal;color:#a6552e}}
-h2 span{{font:400 10.5px Inter,sans-serif;color:#4a4552}}
-.role{{padding:12px 0 11px;border-top:1px solid rgba(26,23,32,.09)}}
+h2 span{{font:400 10.5px Inter,sans-serif;color:#3f4657}}
+.role{{padding:12px 0 11px;border-top:1px solid rgba(22,28,43,.09)}}
 .rt{{display:flex;justify-content:space-between;align-items:center;gap:8px}}
 .rt b{{white-space:nowrap;font:600 13px Inter,sans-serif}}
 .wh{{display:flex;gap:3px;flex:none}}
-.wc{{font:500 7.5px "JetBrains Mono",monospace;border:1px solid rgba(26,23,32,.2);border-radius:3px;padding:1.5px 6px;color:#4a4552;background:rgba(255,255,255,.35)}}
-.role p{{margin-top:5px;font-size:11.6px;line-height:1.5;color:#3a3542}}
+.wc{{font:500 7.5px "JetBrains Mono",monospace;border:1px solid rgba(22,28,43,.2);border-radius:3px;padding:1.5px 6px;color:#3f4657;background:rgba(255,255,255,.35)}}
+.role p{{margin-top:5px;font-size:11.6px;line-height:1.5;color:#3f4657}}
 .grp{{margin-bottom:7px}}
 .gn{{font:600 9.5px "JetBrains Mono",monospace;color:#a6552e;margin-bottom:3px}}
 .cw{{display:flex;flex-wrap:wrap;gap:4px}}
-.chip{{font:500 8.8px "JetBrains Mono",monospace;border:1px solid rgba(26,23,32,.25);border-radius:4px;padding:2.5px 7px;background:rgba(255,255,255,.4)}}
+.chip{{font:500 8.8px "JetBrains Mono",monospace;border:1px solid rgba(22,28,43,.25);border-radius:4px;padding:2.5px 7px;background:rgba(255,255,255,.4)}}
 .sk h2{{margin-bottom:8px}}
 .sk .stackh{{margin-top:14px}}
-.foot{{position:absolute;left:0;right:0;bottom:0;height:34px;border-top:1px solid rgba(26,23,32,.08);padding:0 48px;display:flex;justify-content:space-between;align-items:center;font:500 9px "JetBrains Mono",monospace;color:#6f6a78}}
-.foot b{{color:#1a1720;font-weight:700}}
+.foot{{position:absolute;left:0;right:0;bottom:0;height:34px;border-top:1px solid rgba(22,28,43,.08);padding:0 48px;display:flex;justify-content:space-between;align-items:center;font:500 9px "JetBrains Mono",monospace;color:#5d6474}}
+.foot b{{color:#161c2b;font-weight:700}}
 </style></head><body>
 <div class="hero"><div class="bg"></div><div class="dots"></div>
  <div class="top"><div class="ph"></div>
   <div class="nm"><h1>Cristian Urbano</h1><div class="cr">{chips(d["chips"],"tag")}</div></div>
   <div class="ct">
-   <div><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#1a1720"/><path fill="#f5f2ed" d="M6.9 9.5h2.4V17H6.9zM8.1 5.8a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zM10.6 9.5h2.3v1c.4-.7 1.2-1.2 2.4-1.2 2.4 0 2.8 1.5 2.8 3.5V17h-2.4v-3.6c0-.9 0-2-1.2-2s-1.4.9-1.4 1.9V17h-2.4z"/></svg>linkedin.com/in/cristianurbano</div>
-   <div><svg viewBox="0 0 24 24"><path fill="#1a1720" d="M12 .5a11.5 11.5 0 00-3.6 22.4c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.3 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 015.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.100.8 2.200v3.300c0 .3.2.7.8.6A11.500 11.500 0 0012 .5z"/></svg>github.com/damsorian</div>
+   <div><svg viewBox="0 0 24 24"><rect width="24" height="24" rx="4" fill="#161c2b"/><path fill="#f5f2ed" d="M6.9 9.5h2.4V17H6.9zM8.1 5.8a1.4 1.4 0 110 2.8 1.4 1.4 0 010-2.8zM10.6 9.5h2.3v1c.4-.7 1.2-1.2 2.4-1.2 2.4 0 2.8 1.5 2.8 3.5V17h-2.4v-3.6c0-.9 0-2-1.2-2s-1.4.9-1.4 1.9V17h-2.4z"/></svg>linkedin.com/in/cristianurbano</div>
+   <div><svg viewBox="0 0 24 24"><path fill="#161c2b" d="M12 .5a11.5 11.5 0 00-3.6 22.4c.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.3 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 015.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.100.8 2.200v3.300c0 .3.2.7.8.6A11.500 11.500 0 0012 .5z"/></svg>github.com/damsorian</div>
    <div><svg viewBox="0 0 24 24" fill="none" stroke="#a6552e" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.800-7 11-7 11z"/><circle cx="12" cy="10" r="2.500"/></svg>Bariloche, Argentina</div>
   </div></div>
  <div class="tl">{e(a)}<em>{e(b)}</em>{e(c)}</div>
